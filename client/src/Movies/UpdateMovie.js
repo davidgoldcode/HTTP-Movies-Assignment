@@ -23,20 +23,61 @@ const UpdateMovie = (props) => {
                 setItem(res.data)
             })
             .catch(err => console.log(err))
-    }, [])
+    }, [id])
+
+    const changeHandler = (evt) => {
+        evt.persist();
+        const {name, value} = evt.target;
+        setItem({
+            ...item,
+            [name]: value,
+        })
+    }
+
+    const submitHandler = (evt) => {
+        evt.preventDefault();
+        axios
+            .put(`http://localhost:5000/api/movies/${id}`, item)
+            .then(res => {
+                props.movieList.map((movie) => movie.id === item.id ? item : null);
+                history.push(`/movies/${id}`)
+            })
+            .catch(err => console.log(err))
+    }
+
 
     return(
         <div>
             <h2> Update Items </h2>
-                <form>
+                <form onSubmit={submitHandler}>
                     <input
                     type='text'
                     name='title'
                     value={item.title}
-                    onChange={null}
+                    onChange={changeHandler}
                     placeholder='Movie Title'
                     > 
                     </input>
+                    
+                    <input
+                    type='text'
+                    name='director'
+                    value={item.director}
+                    onChange={changeHandler}
+                    placeholder='Director Name'
+                    > 
+                    </input>
+                    
+                    <input
+                    type='number'
+                    name='metascore'
+                    value={item.metascore}
+                    onChange={changeHandler}
+                    placeholder='Metascore'
+                    > 
+                    </input>
+                    
+                    <button>Update</button>
                 </form>
         </div>
 )
