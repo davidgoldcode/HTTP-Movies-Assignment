@@ -19,7 +19,7 @@ function Movie({ addToSavedList, history }) {
     addToSavedList(movie);
   };
 
-  const updateHandler = (evt) => {
+  const updateHandler = (evt, params) => {
     evt.preventDefault();
     history.push(`/update-movie/${params.id}`)
   }
@@ -39,7 +39,7 @@ function Movie({ addToSavedList, history }) {
       <div className="save-button" onClick={saveMovie}>
         Save
       </div>
-      <div className="save-button" onClick={updateHandler}>
+      <div className="save-button" onClick={evt => updateHandler(evt, params)}>
         Update
       </div>
     </div>
