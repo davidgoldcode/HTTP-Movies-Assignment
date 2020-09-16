@@ -40,7 +40,7 @@ const UpdateMovie = (props) => {
             .put(`http://localhost:5000/api/movies/${id}`, item)
             .then(res => {
                 props.movieList.map((movie) => movie.id === item.id ? item : null);
-                history.push(`/movies/${id}`)
+                history.push(`/`)
             })
             .catch(err => console.log(err))
     }
