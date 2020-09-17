@@ -76,3 +76,9 @@ body {
   color: red;
   text-align: center;
 }
+
+.add-movie-button {
+  text-align: center;
+  margin: 5% auto;
+  text-decoration: none;
+}
