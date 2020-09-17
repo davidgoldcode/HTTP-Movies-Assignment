@@ -36,12 +36,13 @@ const UpdateMovie = (props) => {
 
     const starsHandler = (evt) => {
         evt.persist();
-        const { index, value } = evt.target
-        console.log(item.stars, "STARZZZ")
+        const { name, value } = evt.target
+        console.log(evt.target.value);
         setItem({
             ...item,
-            stars: item.stars.map((x, idx) => idx === index ? value : x)
+            [name]: value.split("\n")
         })
+        console.log(item.stars, "STARZZZ")
     }
 
     const submitHandler = (evt) => {
@@ -89,22 +90,8 @@ const UpdateMovie = (props) => {
 
                     
                     <div className='actors'>
-                        {item.stars.map((actor, index) => (
-                            actor.length > 0 ? 
-                            <input
-                            type='text'
-                            name='stars'
-                            value={item.stars[index]}
-                            onChange={starsHandler}
-                            placeholder='Enter star actors here'
-                            index={item.stars.indexOf(actor)}
-                            >
-                            </input>
-                            : 
-                            null
-                    ))}
+                        <textarea name="stars" value={item.stars.join("\n")} onChange={starsHandler} />                    
                     </div>
-                    
                     <button>Update</button>
                 </form>
         </div>
